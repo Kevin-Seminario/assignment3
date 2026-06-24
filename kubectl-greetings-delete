@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if (( $# < 2 )); then
+  echo "kubectl greetings delete <releasename> <namespace>"
+  exit 0
+fi
+
+# Requirement 4.1
+release=""
+
+# Requirement 4.2
+namespace=""
+
+# Requirement 4.3

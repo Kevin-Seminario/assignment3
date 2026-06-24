@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if (( $# < 1 )); then
+  echo "kubectl greetings show <namespace>"
+  exit 0
+fi
+
+namespace=$1
+
+URL=`minikube service greetings -n $namespace --url`
+
+echo "---"
+curl $URL/greetings
+echo "---"
+
+# Requirement 3.1
+
+echo "---"
+
+# Requirement 3.2
