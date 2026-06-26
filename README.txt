@@ -1,3 +1,9 @@
+Header
+------
+name: Kevin Seminario
+eid: kts897
+comments:
+
 Setup
 -----
 Install Minikube
@@ -27,7 +33,7 @@ Build container:
 -----------------
 
 # TODO : Requirement 1.1
-docker build -t <> .
+docker build -t kts897-assignment3 .
 
 
 Install the greetings helm chart:
@@ -62,14 +68,14 @@ Try app endpoints:
 
         Option 2:
             Terminal 1:
-                kubectl port-forward -n greeting1 service/greetings 8080:80
+                kubectl port-forward -n greetings1 service/greetings 8080:80
             Terminal 2:
                 URL1="http://localhost:8080"
             On Windows+Powershell, set the variable like this:
             $URL1 = "http://localhost:8080"
 
             Terminal 3:
-                kubectl port-forward -n greeting2 service/greetings 8081:80
+                kubectl port-forward -n greetings2 service/greetings 8081:80
             Terminal 4:
                 URL2="http://localhost:8081"
             On Windows+Powershell, set the variable like this:

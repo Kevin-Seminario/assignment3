@@ -4,7 +4,7 @@ metadata:
   name: greetings
 spec:
   # Set replicas; Requirement 2.3
-  replicas: ""
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: greetings
@@ -24,10 +24,10 @@ spec:
           ports:
             - containerPort: 5001
           env:
-          - name: ""      # Requirement 2.4
-            value: ""     # Requirement 2.5
-          - name: ""      # Requirement 2.6
-            value: ""     # Requirement 2.7
+          - name: GREETING      # Requirement 2.4
+            value: {{ .Values.greeting }}     # Requirement 2.5
+          - name: NAMESPACE      # Requirement 2.6
+            value: {{ .Release.Namespace }}     # Requirement 2.7
       volumes:
         - name: greetings-config
           configMap:
@@ -46,7 +46,7 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 5001
-    nodePort: # Requirement 2.8
+    nodePort: {{ .Values.nodePort }} # Requirement 2.8
   type: NodePort
 ---
 apiVersion: v1
@@ -82,6 +82,9 @@ rules:
   resources: ["pods","configmaps","serviceaccounts"]
   verbs: ["get", "list"]
 # Requirement 2.9
+- apiGroups: ["rbac.authorization.k8s.io"]
+  resources: ["roles", "rolebindings"]
+  verbs: ["get", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -92,7 +95,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: greetings
-  namespace: "" # Requirement 2.10
+  namespace: {{ .Release.Namespace }} # Requirement 2.10
 roleRef:
   kind: Role
   name: greetings-reader-role

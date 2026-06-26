@@ -1,4 +1,7 @@
 # Requirement 2.1
-image: ""
+image: "kts897-assignment3:latest"
 
 # Add variables (Requirement 2.2)
+replicas:
+greeting:
+nodePort:

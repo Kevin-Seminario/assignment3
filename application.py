@@ -32,7 +32,7 @@ def get_cluster_details():
 
     # Requirement 1.2
     # Read NAMESPACE env var
-    namespace = "default" 
+    namespace = os.environ.get("NAMESPACE")
     
     v1 = client.CoreV1Api()
     pods = v1.list_namespaced_pod(namespace)
@@ -60,6 +60,17 @@ def get_cluster_details():
 
     # Requirement 1.3 and 1.4
     # Use rbac_api to get roles and rolebindings
+    role_names = []
+    roles = rbac_api.list_namespaced_role (namespace)
+    for role in roles.items:
+        role_names.append(role.metadata.name)
+    output["roles"] = role_names
+
+    rolebinding_names = []
+    rolebindings = rbac_api.list_namespaced_role_binding (namespace)
+    for rolebinding in rolebindings.items:
+        rolebinding_names.append(rolebinding.metadata.name)
+    output["rolebindings"] = rolebinding_names
 
     obj_to_return = json.dumps(output)
     return obj_to_return
