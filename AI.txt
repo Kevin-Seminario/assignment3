@@ -1,0 +1,10 @@
+I used only Claude AI and Google AI for this assignment. I initially tried asking Google AI to summarize the Kubernetes
+Client API calls, but it kept on leading me down the wrong path so I simply tried matching it up with the previous
+code in application.py and asked Claude to check my work before I began to run it. I then dealt with an issue where
+my NAMESPACE environment variable wasn't set correctly in the RoleBinding template. I passed the error to Claude
+and asked, "When attempting to port forward and navigate to an application function, I end up with "curl: (3) URL 
+rejected: No host part in the URL". What happened?". I then realized that nothing I changed in application.py was
+reflected in the endpoints, so I asked Claude, "How do I reapply the application.py file? I'm changing it quite
+drastically and it's not impacting anything relating to what I curl. I always pass these four commands assuming
+it's recompiling: <commands>". This is when I found out that I had to build the image again and was able to
+resolve the naming issue and could actually see the list for each role and rolebinding in the assignment.
